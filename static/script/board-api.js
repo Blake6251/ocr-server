@@ -13,3 +13,15 @@ $.ajax({
     $('#created_at').val(board.created_at);
     $('#modified_at').val(board.modified_at);
 });
+$(document).ready(function () {
+    $("#btn").on("click", function () {
+        var imgSrc = $("#loaded_file").attr("src");
+        Tesseract.recognize(
+            imgSrc,
+            'eng',
+            { logger: info => console.log(info) } 
+        ).then(({ data: { text } }) => {
+            $("#contents").val(text);
+        });
+    });
+});
